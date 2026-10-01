@@ -1,0 +1,3 @@
+accuracy_text,accuracy_image,tokens_text_m_q,tokens_image_k_q,compression_ratio_cr,token_savings_pct,latency_text_sec,latency_image_sec,latency_speedup_x,target_context_tokens,ground_truth,pred_text,pred_image
+1.0,1.0,639,293,2.1809,54.15,0.818,1.6,0.51,500,CIPHER-8562-SIGMA,The special authorization key recorded in emergency protocol ledger section 9 was CIPHER-8562-SIGMA.,The special authorization key recorded in emergency protocol ledger section 9 is CIPHER-8562-SIGMA.
+1.0,0.0,1077,291,3.701,72.98,0.642,1.311,0.49,1000,CIPHER-8028-OMEGA,The special authorization key recorded in emergency protocol ledger section 9 was CIPHER-8028-OMEGA.,The special authorization key recorded in emergency protocol ledger section 9 was **CIPHER8-8028-OMEGA**.
