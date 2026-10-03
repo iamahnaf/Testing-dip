@@ -60,7 +60,9 @@ Config: `MODEL_ID="qwen/qwen3.8-27b:free"`, 2 budgets (canvas 600/1100)
 and 3 retrieval contexts (short/med/long), plus
 `N_SUMM=4` CNN/DailyMail articles truncated to 800 words. Cell 2 loads the
 key from Secret `OPENROUTER_API_KEY` and burns 1 cheap text-only call as a
-reachability check. Images go as JPEG-72 base64 `image_url` parts
+reachability check. Thinking is OFF (`reasoning: {"enabled": False}` —
+verified 2026-10-03: with thinking on, tiny `max_tokens` go entirely to the
+`reasoning` field and `content` comes back null). Images go as JPEG-72 base64 `image_url` parts
 (downscaled to max_h 2600, sent size logged). Retrieval logs 6 paired rows
 (hit/F1, API usage tokens both arms; `m/q/k` and `CR_*` stay null by design). Summarization logs
 `N_SUMM` rows with ROUGE-1/2/L text-vs-image. `chat()` backs off on
