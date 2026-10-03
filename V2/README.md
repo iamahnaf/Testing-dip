@@ -22,13 +22,20 @@ V2/
 
 ## How to run on Kaggle (you have no local GPU)
 
-1. Create a Kaggle notebook with GPU enabled (T4 free tier OK).
-2. Attach this repo as a dataset, or `!git clone <repo-url>` in the first code cell.
+1. Create a Kaggle notebook with GPU enabled (T4 free tier OK) + Internet ON.
+2. Clone the repo (branch `Sayok`, where the V2 work lives) — or skip this,
+   every notebook's Cell 0 does it for you and pulls latest on re-run:
+   `!git clone -b Sayok https://github.com/iamahnaf/Testing-dip.git`
+   (lands in `/kaggle/working/Testing-dip`; alternatively upload a single
+   `V2/notebooks/*.ipynb` via File → Upload — notebooks run standalone).
 3. Open `V2/notebooks/00_setup_env.ipynb` → Run All.
-   - Set Kaggle Secret `HF_TOKEN` (Add-ons → Secrets) for gated models.
-4. Run `01`, then `02` in order. Each notebook is **standalone top-to-bottom**.
-5. After each run: Kaggle → Save Version (persists `/kaggle/working/` outputs).
-   Copy `results/raw/*.jsonl` back here for analysis — never hand-edit them.
+   - Set Kaggle Secret `HF_TOKEN` (Add-ons → Secrets, then attach it) for gated models.
+   - For `03`, also set Secret `OPENROUTER_API_KEY` (Add-ons → Secrets, then attach it).
+4. Run `01`, then `02`/`03`/`04` in any order. Each notebook is **standalone top-to-bottom**.
+5. After each run: Kaggle → Save Version (persists `/kaggle/working/` outputs;
+   `/tmp` weights are intentionally NOT persisted).
+   Copy `/kaggle/working/results/raw/*.jsonl` back to `V2/results/raw/`
+   for analysis — never hand-edit them.
 
 ## Model policy
 

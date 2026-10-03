@@ -148,10 +148,18 @@ its instrument, never silently pooled with 02's processor-based CR.
 ## 6. How to run on Kaggle
 
 1. New Kaggle notebook, GPU ON (T4 suffices), internet ON.
-   Add-ons → Secrets: `HF_TOKEN` (for gated weights).
-2. Attach this repo as a dataset, or `!git clone <repo-url>` in cell 1.
-3. Run `00` → `01` → `02` in order, each Run-All top-to-bottom.
-4. After each run: Save Version (persists `/kaggle/working/`), then copy
+   Add-ons → Secrets: `HF_TOKEN` (for gated weights in `02`),
+   `OPENROUTER_API_KEY` (for `03`). Attach each secret to the notebook.
+2. Clone the repo on the `Sayok` branch (or skip — every notebook's Cell 0
+   clones to `/kaggle/working/Testing-dip` if missing, else `git pull`):
+   `!git clone -b Sayok https://github.com/iamahnaf/Testing-dip.git`
+   Alternative: upload a single `V2/notebooks/*.ipynb` via File → Upload —
+   notebooks are standalone and run without the rest of the tree.
+3. Run `00` → `01`, then `02`/`03`/`04` in any order, each Run-All top-to-bottom.
+   For report numbers fast: `00 → 01 → 03` (no heavy downloads).
+   Overnight local numbers: `04` (~10GB Ollama pull) and `02` (9B 4-bit pull).
+4. After each run: Save Version (persists `/kaggle/working/`; `/tmp` weights
+   are intentionally excluded), then copy
    `/kaggle/working/results/raw/*.jsonl` (+ `val_*.png` proofs) back to
    `V2/results/raw/`. Raw logs are append-only source of truth —
    aggregates/figures derive from them, never hand-edits.
