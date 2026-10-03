@@ -1,16 +1,9 @@
-# Installed inside notebooks too (cells are authoritative on Kaggle).
+# OpenRouter-only path (in-notebook pip cells are authoritative on Kaggle).
 # This file exists for local linting / version pinning.
-transformers>=4.57.0
-accelerate
-bitsandbytes
-torchao
-qwen-vl-utils>=0.0.14
+openai
 pillow
 pdf2image
 pandas
 matplotlib
 rouge-score
-bert-score
-huggingface_hub
-openai
 datasets
