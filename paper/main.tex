@@ -38,7 +38,7 @@ fdhola2320182@bscse.uiu.ac.bd}
 \maketitle
 
 \begin{abstract}
-Large language models (LLMs) are now used on long documents, but every extra text token makes the prompt longer and the computation heavier. Vision-language models can read text from pictures, so there is another option: turn the document into an image and let the vision encoder describe it with a small number of visual tokens. We still do not know when this ``text-as-image'' idea stops working, or whether the saved tokens really make the model faster. In this paper, we test the open vision-language model Gemma~4 (31B) on a needle-in-a-haystack retrieval task based on RULER. We build a simple pipeline that cleans the text and draws it onto an image. We use synthetic documents of 500, 1{,}000, and 1{,}500 tokens and five canvas settings (named after 70 to 1{,}120 visual tokens), and we compare the results with plain text input. We keep the model, the question, and the decoding (temperature $0$) the same, so only the input type changes. Image input cuts the prompt by 53.5\%, 72.9\%, and 82.3\% (compression ratios of about $2.2\times$, $3.7\times$, and $5.7\times$) for the three lengths. Retrieval accuracy is 100\%, 80\%, and 20\%, while plain text stays at 100\%. The mistakes come from reading the image (wrong or missing characters), not from reasoning, and the image path was slower than text in 13 of 15 runs. These early results show the trade-off between compression and accuracy, and they give a reusable pipeline for larger studies.
+Large language models (LLMs) are now used on long documents, but every extra text token makes the prompt longer and the computation heavier. Vision-language models can read text from pictures, so there is another option: turn the document into an image and let the vision encoder describe it with a small number of visual tokens. We still do not know when this ``text-as-image'' idea stops working, or whether the saved tokens really make the model faster. In this paper, we test the open vision-language model Gemma~4 (31B) on a needle-in-a-haystack retrieval task based on RULER. We build a simple pipeline that cleans the text and draws it onto an image. We use synthetic documents of 500, 1{,}000, and 1{,}500 tokens and five canvas settings (named after 70 to 1{,}120 visual tokens), and we compare the results with plain text input. We keep the model, the question, and the decoding (temperature $0$) the same, so only the input type changes. Image input cuts the prompt by 53.5\%, 72.9\%, and 82.3\% (compression ratios of about $2.2\times$, $3.7\times$, and $5.7\times$) for the three lengths. Retrieval accuracy is 100\%, 80\%, and 20\%, while plain text stays at 100\%. The mistakes come from reading the image (wrong or missing characters), not from reasoning, and the image path was slower than text in 13 of 15 runs. Regression analysis reveals that text-as-image achieves net token savings only beyond a break-even threshold of $\approx 181$ words ($\mathrm{CR} > 1.0$), identifying an optimal operating sweet spot between 397 and 434 words where $\ge 50\%$ prompt token savings are achieved with 100\% retrieval accuracy before OCR degradation emerges. These early results show the trade-off between compression and accuracy, and they give a reusable pipeline for larger studies.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -64,6 +64,7 @@ Our contributions are:
 \item A reproducible pipeline that cleans, wraps, and draws any text onto an image with five canvas settings, plus a RULER-style generator where we control the position of the needle.
 \item A full grid test ($3$ context lengths $\times$ $5$ settings) of Gemma~4, comparing text input (Condition~A) with image input (Condition~B) in accuracy, token count, compression ratio, and latency.
 \item A look at how accuracy drops. The errors come from reading the image, and they appear once the context gets longer than about 1{,}000 tokens at a fixed canvas width. We also report honestly that the nominal token budgets did not change the real token count in our setup.
+\item A quantitative threshold and operating zone analysis establishing the break-even boundary ($\approx 181$ words), the $2\times$ compression sweet spot ($397$--$434$ words), and the empirical degradation cliff, providing concrete decision rules for optical context compression.
 \end{enumerate}
 
 Our method works for any text that can be drawn clearly on an image and any model that accepts images. However, our data is synthetic English text of up to 1{,}500 tokens, so we cannot yet say the same holds for real documents or longer contexts.
@@ -210,9 +211,77 @@ Fewer tokens did not give a lower latency in our setup (Fig.~\ref{fig:tradeoff})
 
 Fig.~\ref{fig:tradeoff} comes from our first run at $k=560$. The compression ratio goes up from about 2.2 to 5.4 as the context grows. Image accuracy stays at 1 for 500 and 1{,}000 tokens and falls to 0 at 1{,}500 tokens. This shows the main trade-off of the paper: we get the highest compression exactly where the image is hardest to read.
 
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.88\textwidth,height=9.2cm,keepaspectratio]{figures/threshold_analysis.png}
+\caption{Token optimization threshold analysis for Gemma~4 (31B). (a) Total prompt tokens for text baseline versus image input across document word count, highlighting linear text scaling and the break-even crossing at $\approx 181$ words. (b) Parametric compression ratio (CR) scaling curve with key operational milestones ($\mathrm{CR} = 1.0, 2.0, 3.0$). (c) Trade-off between prompt token savings (\%) and needle retrieval accuracy (\%), delineating the 397--434 word sweet spot. (d) Operational regimes and decision guidelines across five distinct document length zones.}
+\label{fig:threshold}
+\end{figure*}
+
+\subsection{Token Optimization Threshold Analysis}
+\label{sec:threshold}
+To provide actionable guidance on when text-as-image compression is practically beneficial, we model the relationship between document word count $W$, prompt token consumption, and retrieval fidelity.
+
+\textbf{Linear text scaling versus constant visual tokens.}
+In our RULER benchmark, synthetic contexts of 500, 1{,}000, and 1{,}500 target tokens correspond to $W \in \{434, 768, 1{,}180\}$ actual words, respectively. As shown in Fig.~\ref{fig:threshold}(a), the text baseline prompt token count $T_{\text{text}}$ grows strictly linearly with word count:
+\begin{equation}
+T_{\text{text}}(W) \approx 1.3524 \cdot W + 47.16,
+\label{eq:text_scaling}
+\end{equation}
+with $R^2 > 0.999$. The slope indicates an empirical tokenization factor of $\approx 1.35$ text tokens per word for our synthetic corpus, while the intercept $47.16$ represents the constant query and instruction prompt tokens.
+
+In contrast, the vision encoder encodes the rendered document image into a virtually invariant prompt footprint:
+\begin{equation}
+T_{\text{image}} \approx 292.2 \pm 4.5\text{ tokens},
+\label{eq:img_constant}
+\end{equation}
+irrespective of document word count or canvas configuration. Because $T_{\text{image}}$ is fixed by the serving stack, the compression ratio is governed entirely by the document word count:
+\begin{equation}
+\mathrm{CR}(W) = \frac{T_{\text{text}}(W)}{T_{\text{image}}} \approx \frac{1.3524 \cdot W + 47.16}{292.2}.
+\label{eq:cr_model}
+\end{equation}
+
+\textbf{Critical threshold milestones.}
+Solving Eq.~\eqref{eq:cr_model} for specific compression targets identifies four operational milestones (Fig.~\ref{fig:threshold}b):
+\begin{enumerate}
+\item \emph{Break-even threshold ($\mathrm{CR} = 1.0$):} Occurs at $W \approx 181$ words ($T_{\text{text}} \approx 292$ tokens). Below 181 words, rasterizing text into an image produces a net token penalty (negative economy), as the visual representation consumes more tokens than the raw text.
+\item \emph{Meaningful compression ($\mathrm{CR} = 2.0$, $50\%$ savings):} Occurs at $W \approx 397$ words ($T_{\text{text}} \approx 584$ tokens). Beyond this point, visual encoding cuts the prompt token burden by more than half.
+\item \emph{Substantial compression ($\mathrm{CR} = 3.0$, $66.7\%$ savings):} Reached at $W \approx 613$ words ($T_{\text{text}} \approx 876$ tokens).
+\item \emph{High compression ($\mathrm{CR} = 4.0$, $75.0\%$ savings):} Reached at $W \approx 829$ words ($T_{\text{text}} \approx 1{,}168$ tokens).
+\end{enumerate}
+
+\begin{table}[t]
+\caption{Operational Regimes for Text-as-Image Compression}
+\label{tab:zones}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{lrrrl}
+\toprule
+\textbf{Zone} & \textbf{Words ($W$)} & \textbf{CR} & \textbf{Acc.} & \textbf{Guideline}\\
+\midrule
+I. Negative & $< 181$ & $< 1.0\times$ & -- & Raw text\\
+II. Low Gain & $181$--$397$ & $1.0$--$2.0\times$ & High & Marginal utility\\
+III. Sweet Spot & $397$--$434$ & $2.0$--$2.2\times$ & 100\% & \textbf{Optimal}\\
+IV. Extended & $434$--$768$ & $2.2$--$3.7\times$ & 80\% & Usable with risk\\
+V. Cliff & $> 768$ & $> 3.7\times$ & $\le 20\%$ & Avoid (OCR fails)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Operational regimes and the optimal sweet spot.}
+Overlaying retrieval accuracy onto prompt token savings (Fig.~\ref{fig:threshold}c) partitions the operational space into five distinct regimes (Fig.~\ref{fig:threshold}d and Table~\ref{tab:zones}):
+\begin{itemize}
+\item \textbf{Zone I: Negative Economy ($W < 181$ words).} Converting short text to an image increases the prompt token count. Raw text input is strictly superior.
+\item \textbf{Zone II: Marginal Gain ($181 \le W < 397$ words).} While compression is positive ($\mathrm{CR} \in [1.0, 2.0)$), token savings remain below $50\%$, offering insufficient benefit to offset the latency cost of vision encoding.
+\item \textbf{Zone III: The Sweet Spot ($397 \le W \le 434$ words).} In this window, optical compression delivers $50.0\%$--$53.5\%$ token savings ($\mathrm{CR} \approx 2.0$--$2.2\times$) while preserving \textbf{100\% retrieval accuracy} across all five canvas settings. This represents the ideal operating envelope for off-the-shelf Gemma~4.
+\item \textbf{Zone IV: Extended Regime ($434 < W \le 768$ words).} Token savings reach $53.5\%$--$72.9\%$ ($\mathrm{CR} \approx 2.2$--$3.7\times$), but accuracy dips to $80\%$ due to initial OCR character transcription errors. This zone is viable only when approximate retrieval is acceptable.
+\item \textbf{Zone V: Degradation Cliff ($W > 768$ words).} Beyond $768$ words, accuracy collapses to $20\%$ ($W = 1{,}180$). Squeezing over 1{,}000 words into a fixed $\approx 292$-token visual budget overwhelms the optical resolution of the vision encoder, leading to widespread needle omissions.
+\end{itemize}
+
 \section{Discussion and Limitations}
 \label{sec:discussion}
-\textbf{What the results mean.} At about 500 tokens, text-as-image works well for retrieval with a CR above $2\times$, which supports RQ1 for short contexts. With a longer text and a fixed canvas width, the image becomes taller and more crowded, and the vision encoder has to describe much more text with about the same number of tokens. The drop in accuracy fits a readability problem rather than a pure compression problem, because the best canvas still worked at CR 5.26.
+\textbf{What the results mean.} At about 500 tokens (434 words), text-as-image works well for retrieval with a CR above $2\times$, supporting RQ1 for short contexts. However, our threshold analysis shows that text-as-image is not a universal win: below $\approx 181$ words, the fixed $\approx 292$ visual token footprint causes token expansion rather than savings. The optimal sweet spot lies between 397 and 434 words, delivering over $50\%$ token savings with zero accuracy loss. With longer text and a fixed canvas width, the image becomes taller and more crowded, and the vision encoder must describe much more text with the same fixed token budget. The collapse to $20\%$ accuracy beyond 768 words fits an optical readability problem rather than an inherent reasoning failure, as the widest canvas ($k=1120$) still succeeded at CR 5.26.
 
 \textbf{Nominal budgets.} We named the canvas settings after the planned visual-token budgets, but the measured image prompt stayed near 290 tokens for all of them. It seems that the serving stack resizes every image to a fixed number of tokens. So our $k$ changes the resolution and font size, not the real token budget. The comparison across ``budgets'' is really a comparison across drawing densities. Controlling $k$ directly (for example with model-specific image-token settings) is an important next step.
 
@@ -220,7 +289,7 @@ Fig.~\ref{fig:tradeoff} comes from our first run at $k=560$. The compression rat
 
 \section{Conclusion and Future Work}
 \label{sec:conclusion}
-We built a controlled text-as-image pipeline and used it to test how well Gemma~4 finds a hidden fact when the context is shown as an image. Image input cut the prompt tokens by 53--82\% and lost nothing at 500 tokens. But accuracy fell to 80\% and 20\% at 1{,}000 and 1{,}500 tokens because of character reading errors, and latency did not improve. These early results show that simply drawing text on an image can compress context, but it is fragile for an off-the-shelf model. They also suggest that the drawing density matters as much as the compression ratio. In future work, we plan to (a) control the real visual-token budget, (b) go up to 5{,}000 tokens with more needle positions and seeds, (c) add Qwen3.5, Condition~C, CNN/DailyMail, and BABILong, and (d) record prefill time, generation time, and GPU memory.
+We built a controlled text-as-image pipeline and used it to test how well Gemma~4 finds a hidden fact when the context is shown as an image. Image input cut the prompt tokens by 53--82\% and lost nothing at 500 tokens, but accuracy fell to 80\% and 20\% at 1{,}000 and 1{,}500 tokens because of character reading errors, and latency did not improve. Our threshold analysis established a critical break-even point at $\approx 181$ words, an optimal sweet spot at $397$--$434$ words ($\ge 50\%$ savings with 100\% accuracy), and a degradation cliff beyond 768 words. These findings show that simply drawing text on an image can compress context, but it is fragile for an off-the-shelf model when fixed visual token budgets induce excessive information density. In future work, we plan to (a) control the real visual-token budget, (b) go up to 5{,}000 tokens with more needle positions and seeds, (c) add Qwen3.5, Condition~C, CNN/DailyMail, and BABILong, and (d) record prefill time, generation time, and GPU memory.
 
 \section*{Acknowledgment}
 The authors thank the course instructors for guidance on this project.

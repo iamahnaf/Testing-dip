@@ -27,9 +27,9 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Task and Data}{2}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Compression Ratio}{2}{}\protected@file@percent }
 \newlabel{eq:cr}{{1}{2}{}{equation.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Metrics}{2}{}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Summary of Gemma~4 Results (Mean over Five Canvas Settings)}}{3}{}\protected@file@percent }
 \newlabel{tab:summary}{{II}{3}{}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Metrics}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Experimental Setup}{3}{}\protected@file@percent }
 \newlabel{sec:setup}{{IV}{3}{}{section.4}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {V}Results}{3}{}\protected@file@percent }
@@ -37,8 +37,6 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Compression Effectiveness (RQ1)}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Degradation Threshold (RQ3)}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Computational Gains (RQ4)}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Discussion and Limitations}{3}{}\protected@file@percent }
-\newlabel{sec:discussion}{{VI}{3}{}{section.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Left: image accuracy versus context length for each canvas setting. Right: compression ratio versus context length.}}{4}{}\protected@file@percent }
 \newlabel{fig:curves}{{2}{4}{}{figure.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Average percentage of prompt tokens saved by image input for each context length.}}{4}{}\protected@file@percent }
@@ -49,6 +47,15 @@
 \newlabel{fig:cliff}{{5}{4}{}{figure.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Compression ratio and image accuracy as the context grows in the first three-run experiment (canvas $k=560$).}}{4}{}\protected@file@percent }
 \newlabel{fig:tradeoff}{{6}{4}{}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Token Optimization Threshold Analysis}{4}{}\protected@file@percent }
+\newlabel{sec:threshold}{{\mbox  {V-D}}{4}{}{subsection.5.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Token optimization threshold analysis for Gemma~4 (31B). (a) Total prompt tokens for text baseline versus image input across document word count, highlighting linear text scaling and the break-even crossing at $\approx 181$ words. (b) Parametric compression ratio (CR) scaling curve with key operational milestones ($\mathrm  {CR} = 1.0, 2.0, 3.0$). (c) Trade-off between prompt token savings (\%) and needle retrieval accuracy (\%), delineating the 397--434 word sweet spot. (d) Operational regimes and decision guidelines across five distinct document length zones.}}{5}{}\protected@file@percent }
+\newlabel{fig:threshold}{{7}{5}{}{figure.7}{}}
+\newlabel{eq:text_scaling}{{2}{5}{}{equation.2}{}}
+\newlabel{eq:img_constant}{{3}{5}{}{equation.3}{}}
+\newlabel{eq:cr_model}{{4}{5}{}{equation.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Operational Regimes for Text-as-Image Compression}}{5}{}\protected@file@percent }
+\newlabel{tab:zones}{{III}{5}{}{table.3}{}}
 \bibcite{vaswani2017attention}{1}
 \bibcite{dosovitskiy2021vit}{2}
 \bibcite{hsieh2024ruler}{3}
@@ -57,7 +64,9 @@
 \bibcite{rust2023pixel}{6}
 \bibcite{wei2025deepseekocr}{7}
 \bibcite{cheng2025glyph}{8}
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Conclusion and Future Work}{5}{}\protected@file@percent }
-\newlabel{sec:conclusion}{{VII}{5}{}{section.7}{}}
-\@writefile{toc}{\contentsline {section}{References}{5}{}\protected@file@percent }
-\gdef \@abspage@last{5}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Discussion and Limitations}{6}{}\protected@file@percent }
+\newlabel{sec:discussion}{{VI}{6}{}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Conclusion and Future Work}{6}{}\protected@file@percent }
+\newlabel{sec:conclusion}{{VII}{6}{}{section.7}{}}
+\@writefile{toc}{\contentsline {section}{References}{6}{}\protected@file@percent }
+\gdef \@abspage@last{6}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.4)  4 OCT 2026 01:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.4)  15 OCT 2026 22:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -410,41 +410,41 @@ naf/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-Overfull \hbox (1.88562pt too wide) in paragraph at lines 94--105
+Overfull \hbox (1.88562pt too wide) in paragraph at lines 95--106
  [][] 
  []
 
 <figures/budget_70_rendered.png, id=16, 451.6875pt x 1232.605pt>
 File: figures/budget_70_rendered.png Graphic file (type png)
 <use figures/budget_70_rendered.png>
-Package pdftex.def Info: figures/budget_70_rendered.png  used on input line 110
+Package pdftex.def Info: figures/budget_70_rendered.png  used on input line 111
 .
 (pdftex.def)             Requested size: 43.78606pt x 119.4873pt.
 <figures/budget_1120_rendered.png, id=17, 1405.25pt x 1224.575pt>
 File: figures/budget_1120_rendered.png Graphic file (type png)
 <use figures/budget_1120_rendered.png>
 Package pdftex.def Info: figures/budget_1120_rendered.png  used on input line 1
-14.
+15.
 (pdftex.def)             Requested size: 120.95634pt x 105.40482pt.
 LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 1
-22.
+23.
 (C:\Users\Ahnaf\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 122.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 123.
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--131
+Underfull \hbox (badness 10000) in paragraph at lines 130--132
 \OT1/ptm/m/n/10 In prac-tice, we take the nu-mer-a-tor and the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--131
+Underfull \hbox (badness 10000) in paragraph at lines 130--132
 \OT1/ptm/m/n/10 de-nom-i-na-tor di-rectly from the prompt to-ken counts
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--131
+Underfull \hbox (badness 10000) in paragraph at lines 130--132
 \OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 prompt_eval_count\OT1/ptm/m/n/10 ) that the se
 rver re-ports for
  []
@@ -455,34 +455,41 @@ d.png (PNG copy)>]
 File: figures/plot_4_budgets_curves.png Graphic file (type png)
 <use figures/plot_4_budgets_curves.png>
 Package pdftex.def Info: figures/plot_4_budgets_curves.png  used on input line 
-144.
+145.
 (pdftex.def)             Requested size: 412.79901pt x 154.79962pt.
 <figures/plot_3_token_savings.png, id=25, 505.89pt x 361.35pt>
 File: figures/plot_3_token_savings.png Graphic file (type png)
 <use figures/plot_3_token_savings.png>
 Package pdftex.def Info: figures/plot_3_token_savings.png  used on input line 1
-69.
+70.
 (pdftex.def)             Requested size: 207.13834pt x 147.95596pt.
 <figures/plot_1_heatmap.png, id=26, 505.89pt x 361.35pt>
 File: figures/plot_1_heatmap.png Graphic file (type png)
 <use figures/plot_1_heatmap.png>
-Package pdftex.def Info: figures/plot_1_heatmap.png  used on input line 181.
+Package pdftex.def Info: figures/plot_1_heatmap.png  used on input line 182.
 (pdftex.def)             Requested size: 219.08774pt x 156.49124pt.
 <figures/plot_2_degradation_cliff.png, id=27, 578.16pt x 361.35pt>
 File: figures/plot_2_degradation_cliff.png Graphic file (type png)
 <use figures/plot_2_degradation_cliff.png>
 Package pdftex.def Info: figures/plot_2_degradation_cliff.png  used on input li
-ne 190.
+ne 191.
 (pdftex.def)             Requested size: 250.38599pt x 156.49124pt.
 <figures/cr_vs_accuracy_plot.png, id=28, 578.16pt x 361.35pt>
 File: figures/cr_vs_accuracy_plot.png Graphic file (type png)
 <use figures/cr_vs_accuracy_plot.png>
 Package pdftex.def Info: figures/cr_vs_accuracy_plot.png  used on input line 20
-6.
+7.
 (pdftex.def)             Requested size: 250.38599pt x 156.49124pt.
- [3] [4 <./figures/plot_4_budgets_curves.png> <./figures/plot_3_token_savings.p
-ng> <./figures/plot_1_heatmap.png> <./figures/plot_2_degradation_cliff.png> <./
-figures/cr_vs_accuracy_plot.png>]
+ [3]
+<figures/threshold_analysis.png, id=34, 882.8985pt x 628.2672pt>
+File: figures/threshold_analysis.png Graphic file (type png)
+<use figures/threshold_analysis.png>
+Package pdftex.def Info: figures/threshold_analysis.png  used on input line 216
+.
+(pdftex.def)             Requested size: 367.86449pt x 261.77095pt.
+ [4 <./figures/plot_4_budgets_curves.png> <./figures/plot_3_token_savings.png> 
+<./figures/plot_1_heatmap.png> <./figures/plot_2_degradation_cliff.png> <./figu
+res/cr_vs_accuracy_plot.png>] [5 <./figures/threshold_analysis.png>]
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -494,42 +501,42 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[5
-
-] (main.aux)
+[6] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5958 strings out of 467871
- 100595 string characters out of 5418376
+ 5972 strings out of 467871
+ 100947 string characters out of 5418376
  519685 words of memory out of 5000000
- 34771 multiletter control sequences out of 15000+600000
- 672795 words of font info for 134 fonts, out of 8000000 for 9000
+ 34784 multiletter control sequences out of 15000+600000
+ 673873 words of font info for 135 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,11n,77p,1514b,484s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 67i,11n,77p,1852b,484s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmmi10.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmmi7.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/amsfonts/cm/cmmi8.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/
 type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTe
 X/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Ahnaf/AppData/Local/Progra
-ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Ahnaf/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Ahnaf/AppD
-ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Ah
-naf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/
-Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.
-pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8
-a.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8
-a.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi
-8a.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr
-8a.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr
-i8a.pfb>
-Output written on main.pdf (5 pages, 1404173 bytes).
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Ahnaf/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Ahnaf/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Ahnaf
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Us
+ers/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmsy8.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmsy9.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/urw
+/courier/ucrr8a.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/u
+rw/times/utmb8a.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/u
+rw/times/utmbi8a.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/
+urw/times/utmr8a.pfb><C:/Users/Ahnaf/AppData/Local/Programs/MiKTeX/fonts/type1/
+urw/times/utmri8a.pfb>
+Output written on main.pdf (6 pages, 2090700 bytes).
 PDF statistics:
- 107 PDF objects out of 1000 (max. 8388607)
+ 122 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
